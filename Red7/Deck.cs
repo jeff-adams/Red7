@@ -25,8 +25,18 @@ namespace Red7
 
         private List<Card> CreateFreshDeck()
         {
-            // 1 - 7 foreach 7 colors
-            
+            // There are 49 cards, numbered 1 - 7 for each of the 7 colors
+            var freshDeck = new List<Card>();
+
+            foreach (var color in Enum.GetValues(typeof(Color)))
+            {
+                for (int i = 1; i < 8; i++)
+                {
+                    freshDeck.Add(new Card(i, (Color)color));
+                }
+            }
+
+            return freshDeck;
         }
 
         private Stack<Card> Shuffle(List<Card> cards)
