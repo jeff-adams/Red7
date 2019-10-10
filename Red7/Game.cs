@@ -4,35 +4,83 @@ namespace Red7
 {
     public class Game
     {
+        private Action update;
+        private Action draw;
+
         public void Run()
         {
-            bool isUsing = true;
+            Initialize();
 
-            while(isUsing)
+            while(true)
             {
-                // Main Menu
-                var isPlaying = true; // menu selection results
-                while(isPlaying)
-                {
-                    // Game Engine
-
-                    // Testing Deck creation
-                    var deck = new Deck();
-                    Console.WriteLine("The Shuffled Deck\n------------");
-                    for (int i = 0; i < 49; i++)
-                    {
-                        var card = deck.DrawCard();
-                        Console.Write(i + 1);
-                        Console.ForegroundColor = card.Color.Swap();
-                        Console.Write($" {card.Color} {card.Number}");
-                        Console.ResetColor();
-                        Console.WriteLine($" - {card.Rule}");
-                    }  
-
-                    Console.ReadKey();
-                    Environment.Exit(0);
-                }
+                update();
+                draw();
             }
         }
+
+        private void Initialize()
+        {
+            update = MainMenu;
+            draw = MainMenuScreen;
+        }
+
+        #region Update Methods
+
+        private void MainMenu()
+        {
+            // menu selections
+            //  - Host Game --> update = Dealer;
+            //                  draw = GameScreen;
+            //  - Join Game --> update = Client;
+            //                  draw = GameScreen;
+            //  - Quit --> Enviroment.Exit(0);
+            
+        }
+
+        private void Dealer()
+        {
+            // controls the deck and "deals" cards to the other player through TCP connection
+            // once cards are "dealt" --> update = Player;
+        }
+
+        private void Client()
+        {
+            // accepts cards from "dealer" through TCP connection
+            // once cards are recieved --> update = Player;
+        }
+
+        private void Player()
+        {
+            // play cards and check win conditions
+            // option menu selected --> update = OptionMenu;
+            //                          draw = OptionMenuScreen;
+        }
+
+        #endregion
+
+        #region Draw Methods
+
+        private void MainMenuScreen()
+        {
+            // create main menu screen
+            // console.write menu
+        }
+
+        private void OptionMenu()
+        {
+            // player can select 
+        }
+
+        private void GameScreen()
+        {
+            // draws the player's hand, palette, current rule, and game info side bar
+        }
+
+        private void OptionMenuScreen()
+        {
+            // draws the option menu
+        }
+
+        #endregion
     } 
 }
