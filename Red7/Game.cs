@@ -1,4 +1,4 @@
-namespace UntitledGame
+namespace Red7
 {
     public class Game
     {

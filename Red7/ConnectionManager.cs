@@ -2,7 +2,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-namespace UntitledGame
+namespace Red7
 {
     public class ConnectionManager
     {

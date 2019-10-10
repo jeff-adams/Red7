@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UntitledGame
+namespace Red7
 {
     class Program
     {
