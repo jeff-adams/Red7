@@ -15,6 +15,8 @@ namespace Red7
                 while(isPlaying)
                 {
                     // Game Engine
+
+                    // Testing Deck creation
                     var deck = new Deck();
                     Console.WriteLine("The Shuffled Deck\n------------");
                     for (int i = 0; i < 49; i++)
