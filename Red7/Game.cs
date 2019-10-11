@@ -1,11 +1,13 @@
 using System;
+using System.Threading;
 
 namespace Red7
 {
     public class Game
     {
-        private Action update;
-        private Action draw;
+        private string message;
+        private Action Update {get; set;}
+        private Action Draw {get; set;}
 
         public void Run()
         {
@@ -13,15 +15,16 @@ namespace Red7
 
             while(true)
             {
-                update();
-                draw();
+                Update();
+                Draw();
             }
         }
 
         private void Initialize()
         {
-            update = MainMenu;
-            draw = MainMenuScreen;
+            Update = MainMenu;
+            Draw = MainMenuScreen;
+            message = string.Empty;
         }
 
         #region Update Methods
@@ -34,7 +37,13 @@ namespace Red7
             //  - Join Game --> update = Client;
             //                  draw = GameScreen;
             //  - Quit --> Enviroment.Exit(0);
-            
+
+            // Testing input and draw loop
+            if(Console.KeyAvailable)
+            {
+                var input = Console.ReadKey();
+                message = $"{DateTime.Now}: The {input.Key} key was pressed.";
+            }           
         }
 
         private void Dealer()
@@ -56,6 +65,15 @@ namespace Red7
             //                          draw = OptionMenuScreen;
         }
 
+        private void OptionMenu()
+        {
+            // player can select
+            // - Resume --> update = Player;
+            //              draw = GameScreen;
+            // - Quit --> update = MainMenu;
+            //              draw = GameScreen;
+        }
+
         #endregion
 
         #region Draw Methods
@@ -64,21 +82,26 @@ namespace Red7
         {
             // create main menu screen
             // console.write menu
-        }
 
-        private void OptionMenu()
-        {
-            // player can select 
+            // Testing input and draw loop
+            if (!string.IsNullOrEmpty(message))
+            {
+                Console.Clear();
+                Console.Write(message);
+                message = string.Empty;
+            }
         }
 
         private void GameScreen()
         {
             // draws the player's hand, palette, current rule, and game info side bar
+            // console.write game screen
         }
 
         private void OptionMenuScreen()
         {
             // draws the option menu
+            // console.write option menu
         }
 
         #endregion

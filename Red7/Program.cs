@@ -6,6 +6,7 @@ namespace Red7
     {
         static void Main(string[] args)
         {
+            Console.CursorVisible = false;
             new Game().Run();
         }
     }
