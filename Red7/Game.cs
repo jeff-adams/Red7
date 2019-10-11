@@ -25,6 +25,9 @@ namespace Red7
             Update = MainMenu;
             Draw = MainMenuScreen;
             message = string.Empty;
+
+            Console.Clear();
+            Console.CursorVisible = false;
         }
 
         #region Update Methods
@@ -41,8 +44,8 @@ namespace Red7
             // Testing input and draw loop
             if(Console.KeyAvailable)
             {
-                var input = Console.ReadKey();
-                message = $"{DateTime.Now}: The {input.Key} key was pressed.";
+                var input = Console.ReadKey(false);
+                message = $"The {input.Key} key was pressed.";
             }           
         }
 
@@ -84,10 +87,13 @@ namespace Red7
             // console.write menu
 
             // Testing input and draw loop
+            Console.SetCursorPosition(2, Console.WindowTop);
+            Console.WriteLine(DateTime.Now);
+
             if (!string.IsNullOrEmpty(message))
             {
-                Console.Clear();
                 Console.Write(message);
+                WriteClear(Console.WindowWidth - message.Length);
                 message = string.Empty;
             }
         }
@@ -102,6 +108,14 @@ namespace Red7
         {
             // draws the option menu
             // console.write option menu
+        }
+
+        private void WriteClear(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Console.Write(" ");
+            }
         }
 
         #endregion
