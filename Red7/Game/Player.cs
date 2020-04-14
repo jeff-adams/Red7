@@ -12,11 +12,28 @@ namespace Red7
         public Player(string name)
         {
             Name = name;
+            Hand = new List<Card>();
+            Palette = new List<Card>();
         }
 
-        public void ReceiveCard(Card card)
+        public void DealCard(Card card)
         {
             Hand.Add(card);
+        }
+
+        public void DealToPalette(Card card)
+        {
+            Palette.Add(card);
+        }
+
+        public List<Card> DiscardAll()
+        {
+            var cards = new List<Card>();
+            cards.AddRange(Hand);
+            cards.AddRange(Palette);
+            Hand.Clear();
+            Palette.Clear();
+            return cards;
         }
 
         public Card PlayRule(int cardIndex)
